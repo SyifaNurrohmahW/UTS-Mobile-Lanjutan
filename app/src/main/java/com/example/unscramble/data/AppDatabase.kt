@@ -15,21 +15,19 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun dataDAO(): DataDAO
 
-    companion object {
-        @Volatile
-        private var INSTANCE: AppDatabase? = null
 
-        fun getInstance(context: Context): AppDatabase {
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDatabase::class.java,
-                    "history-word"
-                ).build()
-                INSTANCE = instance
-                instance
+        companion object {
+            @Volatile
+            private var Instance: AppDatabase? = null
+
+            fun getDatabase(context: Context): AppDatabase {
+                return Instance ?: synchronized(this) {
+                    Room.databaseBuilder(context, AppDatabase::class.java, "history_database")
+                        .build()
+                        .also { Instance = it }
+                }
             }
         }
     }
-}
+
 

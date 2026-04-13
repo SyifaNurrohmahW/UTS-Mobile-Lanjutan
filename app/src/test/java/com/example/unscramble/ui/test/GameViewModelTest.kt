@@ -27,7 +27,9 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class GameViewModelTest {
-    private val viewModel = GameViewModel()
+    private val viewModel = GameViewModel(
+        dataDAO = TODO()
+    )
 
     @Test
     fun gameViewModel_Initialization_FirstWordLoaded() {

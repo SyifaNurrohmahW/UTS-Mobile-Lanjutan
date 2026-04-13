@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            val database = AppDatabase.getInstance(applicationContext)
+            val database = AppDatabase.getDatabase(applicationContext)
             val gameViewModel: GameViewModel = viewModel(
                 factory = GameViewModel.provideFactory(database.dataDAO())
             )

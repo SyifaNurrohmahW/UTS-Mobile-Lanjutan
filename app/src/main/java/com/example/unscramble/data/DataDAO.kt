@@ -11,6 +11,6 @@ interface DataDAO {
     @Insert()
     suspend fun insertHistory(history: HistoryEntity)
 
-    @Query("SELECT * FROM historyData ORDER BY timestamp DESC")
+    @Query("SELECT * FROM historyData ORDER BY id DESC")
     suspend fun getAllHistory(): List<HistoryEntity>
 }

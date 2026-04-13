@@ -299,6 +299,6 @@ private fun FinalScoreDialog(
 @Composable
 fun GameScreenPreview() {
     UnscrambleTheme {
-        HistorySection(historyWords = listOf("animal", "camera", "travel"))
+
     }
 }
