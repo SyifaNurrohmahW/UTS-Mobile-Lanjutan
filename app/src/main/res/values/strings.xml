@@ -27,4 +27,7 @@
     <string name="exit">Exit</string>
     <string name="play_again">Play Again</string>
     <string name="wrong_guess">Wrong Guess!</string>
+    <string name="history_title">History Jawaban Benar</string>
+    <string name="history_empty">Belum ada jawaban benar yang tersimpan.</string>
+    <string name="history_item">%1$d. %2$s</string>
 </resources>

@@ -32,6 +32,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.shapes
 import androidx.compose.material3.MaterialTheme.typography
@@ -54,14 +55,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.unscramble.R
 import com.example.unscramble.ui.theme.UnscrambleTheme
 
 @Composable
-fun GameScreen(gameViewModel: GameViewModel = viewModel()) {
+fun GameScreen(gameViewModel: GameViewModel) {
     val gameUiState by gameViewModel.uiState.collectAsState()
     val mediumPadding = dimensionResource(R.dimen.padding_medium)
+
 
     Column(
         modifier = Modifier
@@ -119,6 +120,12 @@ fun GameScreen(gameViewModel: GameViewModel = viewModel()) {
         }
 
         GameStatus(score = gameUiState.score, modifier = Modifier.padding(20.dp))
+        HistorySection(
+            historyWords = gameUiState.historyWords,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = mediumPadding)
+        )
 
         if (gameUiState.isGameOver) {
             FinalScoreDialog(
@@ -140,6 +147,44 @@ fun GameStatus(score: Int, modifier: Modifier = Modifier) {
             modifier = Modifier.padding(8.dp)
         )
 
+    }
+}
+
+@Composable
+fun HistorySection(
+    historyWords: List<String>,
+    modifier: Modifier = Modifier
+) {
+    val recentHistory = historyWords.take(5)
+
+    Card(modifier = modifier) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.history_title),
+                style = typography.titleMedium
+            )
+
+            if (recentHistory.isEmpty()) {
+                Text(
+                    text = stringResource(R.string.history_empty),
+                    style = typography.bodyMedium
+                )
+            } else {
+                recentHistory.forEachIndexed { index, word ->
+                    Text(
+                        text = stringResource(R.string.history_item, index + 1, word),
+                        style = typography.bodyMedium
+                    )
+
+                    if (index < recentHistory.lastIndex) {
+                        HorizontalDivider()
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -254,6 +299,6 @@ private fun FinalScoreDialog(
 @Composable
 fun GameScreenPreview() {
     UnscrambleTheme {
-        GameScreen()
+        HistorySection(historyWords = listOf("animal", "camera", "travel"))
     }
 }

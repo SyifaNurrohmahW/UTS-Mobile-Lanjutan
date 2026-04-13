@@ -7,8 +7,9 @@ import androidx.room.RoomDatabase
 import kotlin.jvm.java
 
 @Database (entities =
-    [allWord::class],
-    version = 1) // version di gunakan ketika data berubah maka harus di update
+    [HistoryEntity::class],
+    version = 1,
+    exportSchema = false) // version di gunakan ketika data berubah maka harus di update
 
 abstract class AppDatabase : RoomDatabase() {
 
@@ -23,11 +24,10 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "history-word" // Nama databasenya
+                    "history-word"
                 ).build()
                 INSTANCE = instance
                 instance
-
             }
         }
     }
