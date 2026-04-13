@@ -16,23 +16,34 @@
 
 package com.example.unscramble.data
 
+import androidx.room.Entity
+import java.io.Serial
+
+
 const val MAX_NO_OF_WORDS = 10
 const val SCORE_INCREASE = 20
 
 // List with all the words for the Game
-val allWords: Set<String> =
-    setOf(
-        "at",
-        "sea",
-        "home",
-        "arise",
-        "banana",
-        "android",
-        "birthday",
-        "briefcase",
-        "motorcycle",
-        "cauliflower"
-    )
+@Entity("historyData")
+data class allWord(
+
+    val allWords: Set<String> =
+        setOf(
+            "at",
+            "sea",
+            "home",
+            "arise",
+            "banana",
+            "android",
+            "birthday",
+            "briefcase",
+            "motorcycle",
+            "cauliflower"
+        )
+)
+
+
+
 
 /**
  * Maps words to their lengths. Each word in allWords has a unique length. This is required since

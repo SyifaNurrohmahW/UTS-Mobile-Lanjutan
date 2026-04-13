@@ -27,6 +27,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import java.io.File
 
 /**
  * ViewModel containing the app data and methods to process the data
@@ -43,6 +44,8 @@ class GameViewModel : ViewModel() {
     // Set of words used in the game
     private var usedWords: MutableSet<String> = mutableSetOf()
     private lateinit var currentWord: String
+
+
 
     init {
         resetGame()
@@ -73,6 +76,8 @@ class GameViewModel : ViewModel() {
             // and call updateGameState() to prepare the game for next round
             val updatedScore = _uiState.value.score.plus(SCORE_INCREASE)
             updateGameState(updatedScore)
+
+
         } else {
             // User's guess is wrong, show an error
             _uiState.update { currentState ->
@@ -82,6 +87,7 @@ class GameViewModel : ViewModel() {
         // Reset user guess
         updateUserGuess("")
     }
+
 
     /*
      * Skip to next word
